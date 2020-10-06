@@ -1,0 +1,24 @@
+{
+  "name": "ukkonen_express_intro_TB",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasB-Shaw/ukkonen_express_intro_TB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasB-Shaw/ukkonen_express_intro_TB/issues"
+  },
+  "homepage": "https://github.com/ThomasB-Shaw/ukkonen_express_intro_TB#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
