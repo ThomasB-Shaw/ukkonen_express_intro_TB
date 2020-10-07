@@ -1,5 +1,7 @@
 // Require express - gives us a function
 const express = require('express');
+// Require body-parser to parse through data
+const bodyParser = require('body-parser');
 
 // create an instance of express by calling the function
 // returned above - gives us an object
@@ -9,23 +11,28 @@ const port = 5000;
 // express static file serving - public is the folder name
 app.use(express.static('server/public'));
 
-let quotesData = [
-    { quote: 'I\'m not going to school just for the academics - I wanted to share ideas, to be around people who are passionate about learning.', author: 'Emma Watson' },
-    { quote: 'Remember there\'s no such thing as a small act of kindness. Every act creates a ripple with no logical end.', author: 'Scott Adams' },
-    { quote: 'Intelligence plus character-that is the goal of true education.', author: 'Martin Luther King, Jr.' }
-];
+app.use(bodyParser.urlencoded({extended: true}));
 
-let index = 0
+const quotesData = require('./modules/quotes.js')
 
 app.get('/quotes', (req, res) => {
-    console.log('Hi from git request')
-    res.send(quotesData);
+    console.log('Hi from get request')
+    res.send(quotesData.list);
 });
 
+
 app.get('/randomQuote', (req, res) => {
-    console.log('Hi from git request')
-    let randomNumber = getRandomInt(quotesData.length);
-    res.send(quotesData[randomNumber]);
+    let randomNumber = getRandomInt(quotesData.list.length);
+    res.send(quotesData.list[randomNumber]);
+});
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+app.post('/quotes', (req, res) => {
+    console.log('Hello from post', req.body);
+    quotesData.list.push(req.body);
+    console.log(quotesData);
 });
 
 app.listen(port, () => {
